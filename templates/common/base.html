@@ -5,32 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}RateBait{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <script src="https://kit.fontawesome.com/5aadc520af.js" crossorigin="anonymous"></script>
+    <title>Straight Rate</title>
 </head>
 <body>
     <header>
-        <nav>
+        <div id="head-1">
+            <a href="{% url 'home' %}"><img id="logo" src="{% static 'images/logo_SR_transparent.png' %}" alt="logo"></a>
             <ul>
-                <li><a href="{% url 'movie_list' %}">Movies</a></li>
-                <li><a href="{% url 'video_game_list' %}">Video Games</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Video Games</a></li>
             </ul>
+        </div>
+        <div id="head-2">
             <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
-                {% endif %}
+                <li><a href="#">Sign in</a></li>
+                <li><a href="#">Log in</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
-    <main>
+    <div id="wrapper-main">
         {% block content %}
         {% endblock %}
-    </main>
+    </div>
     <footer>
-        <p>&copy; 2024 RateBait</p>
+        <p>&copy; 2024 StraightRate. You have your rights.</p>
     </footer>
 </body>
 </html>

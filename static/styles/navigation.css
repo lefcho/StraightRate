@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+#logo {
+    width: 150px;
+    height: auto;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Cormorant Infant", serif;
+    font-weight: 100;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.888);
+    padding: 0.5em 1em;
+}
+
+#head-1, #head-2 {
+    display: flex;
+    align-items: center;
+}
+
+#head-1 ul, #head-2 ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+#head-1 ul li, #head-2 ul li {
+    padding: 0 1em;
+}
+
+#head-1 ul li a, #head-2 ul li a {
+    font-size: 1.5em;
+    font-family: "Karla", serif;
+    color: rgb(120, 230, 77);
+}

@@ -105,6 +105,12 @@ class Movie(models.Model):
         verbose_name='Director',
     )
 
+    poster = models.ImageField(
+        upload_to='posters/',
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return self.title
 
@@ -129,6 +135,12 @@ class VideoGame(models.Model):
         on_delete=models.SET_NULL,
         related_name='games',
         verbose_name='Developer'
+    )
+
+    poster = models.ImageField(
+        upload_to='posters/',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

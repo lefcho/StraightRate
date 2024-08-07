@@ -1,0 +1,55 @@
+
+.poster {
+    height: 250px;
+}
+
+#wrapper-main {
+    flex-grow: 1;
+    background-color: rgb(213, 213, 213);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main h2 {
+    font-size: 2em;
+    padding: 0.7em;
+    display: flex;
+    justify-content: center;
+}
+
+main h3 {
+    font-size: 1.3em;
+    padding: 3px 0;
+    color: rgb(120, 230, 77);
+}
+
+.top-movies, .top-video-games {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    background-color: rgba(0, 0, 0, 0.888);
+    padding: 2em;
+    max-width: 70%;
+    border-radius: 10px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+}
+
+.movie, .game {
+    color: rgb(120, 230, 77);
+    padding: 0.5em;
+    border-style: solid;
+    border-color: rgba(81, 141, 39, 0.315);
+    border-radius: 1em;
+
+}
+
+.movie, .game p{
+    font-size: 1.2em;
+}

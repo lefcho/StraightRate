@@ -1,4 +1,3 @@
-
 .poster {
     height: 250px;
 }
@@ -21,10 +20,26 @@ main h2 {
     justify-content: center;
 }
 
-main h3 {
-    font-size: 1.3em;
+.movie, .game {
+    width: 200px;
+    text-align: center;
+    color: rgb(120, 230, 77);
+    padding: 0.5em;
+    border-style: solid;
+    border-color: rgba(81, 141, 39, 0.315);
+    border-radius: 1em;
+}
+
+.movie h3, .game h3 {
+    font-size: 1em;
+    text-align: center;
+    margin: 0;
     padding: 3px 0;
     color: rgb(120, 230, 77);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .top-movies, .top-video-games {
@@ -41,15 +56,6 @@ main h3 {
     box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
 }
 
-.movie, .game {
-    color: rgb(120, 230, 77);
-    padding: 0.5em;
-    border-style: solid;
-    border-color: rgba(81, 141, 39, 0.315);
-    border-radius: 1em;
-
-}
-
-.movie, .game p{
+.movie, .game p {
     font-size: 1.2em;
 }

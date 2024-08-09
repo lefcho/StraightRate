@@ -24,9 +24,6 @@ class Review(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.user.username} - {self.rating}"
-
 
 class Director(models.Model):
     first_name = models.CharField(
@@ -155,6 +152,9 @@ class MovieReview(Review):
         verbose_name='Movie'
     )
 
+    def __str__(self):
+        return f'{self.user.username} gave {self.movie.title} a {self.rating}'
+
 
 class VideoGameReview(Review):
     video_game = models.ForeignKey(
@@ -163,3 +163,6 @@ class VideoGameReview(Review):
         related_name='reviews',
         verbose_name='Video Game'
     )
+
+    def __str__(self):
+        return f'{self.user.username} gave {self.video_game.title} a {self.rating}'

@@ -1,0 +1,116 @@
+.details {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.888);
+    max-width: 70%;
+    padding: 2em;
+    margin: 2em auto auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    color: rgb(120, 230, 77);
+}
+
+
+.details .poster {
+    max-height: 400px;
+}
+
+.big-info-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 2em;
+    gap: 1em;
+}
+
+
+.big-info-cont h1 {
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.small-info-cont {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 1em 0;
+}
+
+.small-info-cont p {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1.5em;
+    color: #c45858;
+}
+
+.small-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.info {
+    font-size: 1.2em;
+    color: aqua;
+}
+
+.title-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.small-info-cont .seperator {
+    font-size: 2em;
+    color: rgb(120, 230, 77);
+}
+
+.title-cont p {
+    font-weight: bold;
+    font-size: 1.8em;
+    color: #d1a858;
+    margin: 0.5em 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#title-review {
+    font-size: 2.7em;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.reviews {
+    display: flex;
+    gap: 2em;
+    margin:  auto;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.888);
+    padding: 2em;
+    border-radius: 10px;
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    color: rgb(120, 230, 77);
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    font-size: 1.2em;
+    background-color: rgb(74, 69, 69);
+    color: aqua;
+    gap: 1em;
+    padding: 1em 2em;
+    -webkit-box-shadow: inset -4px 4px 34px -1px rgba(0,0,0,0.6);
+    -moz-box-shadow: inset -4px 4px 34px -1px rgba(0,0,0,0.6);
+    box-shadow: inset -4px 4px 34px -1px rgba(0,0,0,0.6);
+    border-radius: 10px;
+}

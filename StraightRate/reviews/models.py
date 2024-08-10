@@ -113,6 +113,11 @@ class Movie(models.Model):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
         return round(avg_rating, 1) if avg_rating else 'Not reviewed'
 
+    def director_full_name(self):
+        if self.director:
+            return f"{self.director.first_name} {self.director.last_name}"
+        return 'No director assigned'
+
     def __str__(self):
         return self.title
 

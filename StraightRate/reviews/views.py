@@ -1,5 +1,5 @@
 from django.db.models import Avg
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from StraightRate.reviews.models import Movie, VideoGame
 
@@ -19,3 +19,14 @@ def home(request):
     }
 
     return render(request, 'common/home.html', context)
+
+
+def details_movie_view(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    reviews = movie.reviews.all()
+
+    context = {
+        'movie': movie,
+        'reviews': reviews,
+    }
+    return render(request, 'movies/movie-details.html', context)

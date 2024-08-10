@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+{% load static %}
+ <main>
+    <div class="details">
+        <div class="image-container">
+            <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
+        </div>
+        <div class="big-info-cont">
+            <div class="title-cont">
+                <h1 class="big-title">
+                    {{ movie.title }}
+                </h1>
+                <p>{{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+            </div>
+            <div class="small-info-cont">
+                <p class="small-info">Released:
+                    <h5 class="info">{{ movie.release_date }}</h5>
+                <p>
+                <p class="seperator"> | <p>
+                <p class="small-info">Genre:
+                    <h5 class="info">{{ movie.genre }}</h5>
+                <p>
+                <p class="seperator"> | <p>
+                <p class="small-info">Director:
+                    <h5 class="info">{{ movie.director_full_name }}</h5>
+                <p>
+            </div>
+            <p class="description">
+                {{ movie.description }}
+            </p>
+        </div>
+    </div>
+    <h2 id="title-review">Reviews:</h2>
+    <div class="reviews">
+        {% for review in reviews %}
+        <div class="review">
+            <h3 class="review-username">{{ review.user.username }}</h3>
+            <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
+            <p class="review-comment">{{ review.comment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

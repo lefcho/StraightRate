@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Avg
 
 
 class Review(models.Model):
@@ -108,6 +109,10 @@ class Movie(models.Model):
         blank=True,
     )
 
+    def average_rating(self):
+        avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        return round(avg_rating, 1) if avg_rating else 'Not reviewed'
+
     def __str__(self):
         return self.title
 
@@ -139,6 +144,10 @@ class VideoGame(models.Model):
         null=True,
         blank=True,
     )
+
+    def average_rating(self):
+        avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        return round(avg_rating, 1) if avg_rating else 'Not reviewed'
 
     def __str__(self):
         return self.title

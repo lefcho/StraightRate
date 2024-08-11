@@ -59,7 +59,7 @@ class Developer(models.Model):
 
 
 class Movie(models.Model):
-    class GenreChoices(models.TextChoices):
+    class MovieGenreChoices(models.TextChoices):
         ACTION = 'Action', 'Action'
         ADVENTURE = 'Adventure', 'Adventure'
         COMEDY = 'Comedy', 'Comedy'
@@ -91,7 +91,7 @@ class Movie(models.Model):
 
     genre = models.CharField(
         max_length=100,
-        choices=GenreChoices.choices,
+        choices=MovieGenreChoices.choices,
         verbose_name='Genre',
     )
 
@@ -123,6 +123,19 @@ class Movie(models.Model):
 
 
 class VideoGame(models.Model):
+    class VideoGameGenreChoices(models.TextChoices):
+        ACTION_ADVENTURE = 'Action-Adventure', 'Action-Adventure'
+        RPG = 'RPG', 'Role-Playing Game'
+        FPS = 'FPS', 'First Person Shooter'
+        MMO = 'MMO', 'MMO'
+        STRATEGY = 'Strategy', 'Strategy'
+        SPORTS = 'Sports', 'Sports'
+        HORROR = 'Horror', 'Horror'
+        FIGHTING = 'Fighting', 'Fighting'
+        RACING = 'Racing', 'Racing'
+        PLATFORMER = 'Platformer', 'Platformer'
+        SURVIVAL = 'Survival', 'Survival'
+
     title = models.CharField(
         max_length=255,
         verbose_name='Title'
@@ -134,6 +147,12 @@ class VideoGame(models.Model):
 
     release_date = models.DateField(
         verbose_name='Release Date'
+    )
+
+    genre = models.CharField(
+        max_length=100,
+        choices=VideoGameGenreChoices.choices,
+        verbose_name='Genre'
     )
 
     developer = models.ForeignKey(

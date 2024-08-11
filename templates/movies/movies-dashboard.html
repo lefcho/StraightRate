@@ -7,6 +7,7 @@
         <div class="movies">
             {% if movies %}
                 {% for movie in movies %}
+                    <a href="{% url 'details-movie' movie.id %}">
                     <div class="movie">
                         <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
                         <h3>{{ movie.title }}</h3>
@@ -16,6 +17,7 @@
                             <p>Not reviewed yet.</p>
                         {% endif %}
                     </div>
+                    </a>
                 {% endfor %}
             {% else %}
                 <h4 class="no-content">No {{ genre }} movies yet.</h4>

@@ -49,7 +49,7 @@ def details_game_view(request, game_id):
 
 
 def movie_dashboard(request):
-    genres = Movie.GenreChoices.choices
+    genres = Movie.MovieGenreChoices.choices
     movies_by_genre = {genre[1]: Movie.objects.filter(genre=genre[0]) for genre in genres}
 
     context = {
@@ -59,8 +59,13 @@ def movie_dashboard(request):
 
 
 def video_games_dashboard(request):
-    pass
+    genres = VideoGame.VideoGameGenreChoices.choices
+    games_by_genre = {genre[1]: VideoGame.objects.filter(genre=genre[0]) for genre in genres}
 
+    context = {
+        'games_by_genre': games_by_genre,
+    }
+    return render(request, 'video-games/video-games-dashboard.html', context)
 
 
 

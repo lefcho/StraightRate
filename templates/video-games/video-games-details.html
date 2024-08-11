@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+{% load static %}
+ <main>
+    <div class="details">
+        <div class="image-container">
+            <img class="poster" src="{{ video_game.poster.url }}" alt="{{ video_game.title }} Poster">
+        </div>
+        <div class="big-info-cont">
+            <div class="title-cont">
+                <h1 class="big-title">
+                    {{ video_game.title }}
+                </h1>
+                <p>{{ video_game.average_rating }} <i class="fa-solid fa-star"></i></p>
+            </div>
+            <div class="small-info-cont">
+                <p class="small-info">Released:</p>
+                <h5 class="info">{{ video_game.release_date }}</h5>
+
+                <p class="seperator"> | </p>
+
+                <p class="small-info">Developer:</p>
+                <h5 class="info">{{ video_game.developer.developer_name }}</h5>
+            </div>
+            <p class="description">
+                {{ video_game.description }}
+            </p>
+        </div>
+    </div>
+    <h2 id="title-review">Reviews:</h2>
+    <div class="reviews">
+        {% for review in reviews %}
+        <div class="review">
+            <h3 class="review-username">{{ review.user.username }}</h3>
+            <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
+            <p class="review-comment">{{ review.comment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

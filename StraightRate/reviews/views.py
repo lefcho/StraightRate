@@ -30,3 +30,51 @@ def details_movie_view(request, movie_id):
         'reviews': reviews,
     }
     return render(request, 'movies/movie-details.html', context)
+
+
+def details_game_view(request, game_id):
+    video_game = get_object_or_404(VideoGame, id=game_id)
+    reviews = video_game.reviews.all()
+
+    context = {
+        'video_game': video_game,
+        'reviews': reviews,
+    }
+
+    return render(request, 'video-games/video-games-details.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

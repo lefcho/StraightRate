@@ -19,7 +19,7 @@
         {% for game in top_games %}
         <div class="game">
             <img class="poster" src="{{ game.poster.url }}" alt="{{ game.title }} Poster">
-            <a href="#"><h3>{{ game.title }}</h3></a>
+            <a href="{% url 'details-video-game' game.id %}"><h3>{{ game.title }}</h3></a>
             <p>{{ game.average_rating }}<i class="fa-solid fa-star"></i></p>
         </div>
         {% endfor %}

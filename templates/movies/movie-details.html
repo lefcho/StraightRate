@@ -16,17 +16,18 @@
                 <p>{{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
             </div>
             <div class="small-info-cont">
-                <p class="small-info">Released:
-                    <h5 class="info">{{ movie.release_date }}</h5>
-                <p>
-                <p class="seperator"> | <p>
-                <p class="small-info">Genre:
-                    <h5 class="info">{{ movie.genre }}</h5>
-                <p>
-                <p class="seperator"> | <p>
-                <p class="small-info">Director:
-                    <h5 class="info">{{ movie.director_full_name }}</h5>
-                <p>
+                <p class="small-info">Released:</p>
+                <h5 class="info">{{ movie.release_date }}</h5>
+
+                <p class="seperator"> | </p>
+
+                <p class="small-info">Genre:</p>
+                <h5 class="info">{{ movie.genre }}</h5>
+
+                <p class="seperator"> | </p>
+
+                <p class="small-info">Director:</p>
+                <h5 class="info">{{ movie.director_full_name }}</h5>
             </div>
             <p class="description">
                 {{ movie.description }}

@@ -11,6 +11,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-bottom: 2em;
 }
 
 main h2 {
@@ -42,7 +43,11 @@ main h2 {
     width: 100%;
 }
 
-.top-movies, .top-video-games {
+.no-content {
+    color: rgb(120, 230, 77);
+}
+
+.top-movies, .top-video-games, .movies {
     margin: auto;
     display: flex;
     justify-content: center;

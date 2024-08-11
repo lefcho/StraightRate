@@ -1,4 +1,4 @@
-from django.db.models import Avg
+from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404
 
 from StraightRate.reviews.models import Movie, VideoGame
@@ -6,12 +6,16 @@ from StraightRate.reviews.models import Movie, VideoGame
 
 def home(request):
     top_movies = (Movie.objects
-                  .annotate(avg_rating=Avg('reviews__rating'))
+                  .annotate(avg_rating=Avg('reviews__rating'),
+                            review_count=Count('reviews'))
+                  .filter(review_count__gt=0)
                   .order_by('-avg_rating')
     [:5])
     top_games = (VideoGame.objects
-                 .annotate(avg_rating=Avg('reviews__rating'))
-                 .order_by('-avg_rating')
+                  .annotate(avg_rating=Avg('reviews__rating'),
+                            review_count=Count('reviews'))
+                  .filter(review_count__gt=0)
+                  .order_by('-avg_rating')
     [:5])
     context = {
         'top_movies': top_movies,
@@ -44,7 +48,18 @@ def details_game_view(request, game_id):
     return render(request, 'video-games/video-games-details.html', context)
 
 
+def movie_dashboard(request):
+    genres = Movie.GenreChoices.choices
+    movies_by_genre = {genre[1]: Movie.objects.filter(genre=genre[0]) for genre in genres}
 
+    context = {
+        'movies_by_genre': movies_by_genre,
+    }
+    return render(request, 'movies/movies-dashboard.html', context)
+
+
+def video_games_dashboard(request):
+    pass
 
 
 

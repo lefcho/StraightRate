@@ -111,7 +111,7 @@ class Movie(models.Model):
 
     def average_rating(self):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
-        return round(avg_rating, 1) if avg_rating else 'Not reviewed'
+        return round(avg_rating, 1) if avg_rating is not None else None
 
     def director_full_name(self):
         if self.director:
@@ -152,7 +152,7 @@ class VideoGame(models.Model):
 
     def average_rating(self):
         avg_rating = self.reviews.aggregate(Avg('rating'))['rating__avg']
-        return round(avg_rating, 1) if avg_rating else 'Not reviewed'
+        return round(avg_rating, 1) if avg_rating is not None else None
 
     def __str__(self):
         return self.title

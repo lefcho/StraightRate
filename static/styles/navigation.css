@@ -51,8 +51,12 @@ header {
     padding: 0 1em;
 }
 
-#head-1 ul li a, #head-2 ul li a {
+#head-1 ul li a, #head-2 ul li {
     font-size: 1.5em;
     font-family: "Karla", serif;
     color: rgb(120, 230, 77);
+}
+
+#head-2 ul li a {
+        color: rgb(115, 225, 214);
 }

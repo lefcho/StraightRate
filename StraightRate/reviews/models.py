@@ -178,18 +178,28 @@ class VideoGame(models.Model):
 
 
 class MovieReview(Review):
-    movie = models.ForeignKey(
-        to=Movie,
-        on_delete=models.CASCADE,
-        related_name='reviews',
-        verbose_name='Movie'
-    )
+        class Meta:
+            constraints = [
+                models.UniqueConstraint(fields=['user', 'movie'], name='unique_movie_review'),
+            ]
 
-    def __str__(self):
-        return f'{self.user.username} gave {self.movie.title} a {self.rating}'
+        movie = models.ForeignKey(
+            to=Movie,
+            on_delete=models.CASCADE,
+            related_name='reviews',
+            verbose_name='Movie',
+        )
+
+        def __str__(self):
+            return f'{self.user.username} gave {self.movie.title} a {self.rating}'
 
 
 class VideoGameReview(Review):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'video_game'], name='unique_videogame_review'),
+        ]
+
     video_game = models.ForeignKey(
         to=VideoGame,
         on_delete=models.CASCADE,

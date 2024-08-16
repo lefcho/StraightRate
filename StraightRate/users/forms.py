@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import get_user_model
+from StraightRate.reviews.models import MovieReview, VideoGameReview
 
 User = get_user_model()
 

@@ -1,48 +1,97 @@
 {% extends 'common/base.html' %}
-
 {% block content %}
-
 {% load static %}
- <main>
+<main>
     <div class="details">
         <div class="image-container">
             <img class="poster" src="{{ movie.poster.url }}" alt="{{ movie.title }} Poster">
         </div>
-        <div class="big-info-cont">
-            <div class="title-cont">
-                <h1 class="big-title">
-                    {{ movie.title }}
-                </h1>
-                <p>{{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+        <div class="info-cont">
+            <div class="big-info-cont">
+                <div class="title-cont">
+                    <h1 class="big-title">{{ movie.title }}</h1>
+                    {% if movie.average_rating %}
+                        <p>{{ movie.average_rating }} <i class="fa-solid fa-star"></i></p>
+                    {% else %}
+                        <p>Not reviewed yet.</p>
+                    {% endif %}
+                </div>
+
+                <div class="small-info-cont">
+                    <p class="small-info">Released:</p>
+                    <h5 class="info">{{ movie.release_date }}</h5>
+
+                    <p class="seperator"> | </p>
+
+                    <p class="small-info">Genre:</p>
+                    <h5 class="info">{{ movie.genre }}</h5>
+
+                    <p class="seperator"> | </p>
+
+                    <p class="small-info">Director:</p>
+                    <h5 class="info">{{ movie.director_full_name }}</h5>
+                </div>
+
+                <p class="description">
+                    {{ movie.description }}
+                </p>
             </div>
-            <div class="small-info-cont">
-                <p class="small-info">Released:</p>
-                <h5 class="info">{{ movie.release_date }}</h5>
-
-                <p class="seperator"> | </p>
-
-                <p class="small-info">Genre:</p>
-                <h5 class="info">{{ movie.genre }}</h5>
-
-                <p class="seperator"> | </p>
-
-                <p class="small-info">Director:</p>
-                <h5 class="info">{{ movie.director_full_name }}</h5>
-            </div>
-            <p class="description">
-                {{ movie.description }}
-            </p>
         </div>
     </div>
-    <h2 id="title-review">Reviews:</h2>
-    <div class="reviews">
-        {% for review in reviews %}
-        <div class="review">
-            <h3 class="review-username">{{ review.user.username }}</h3>
-            <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
-            <p class="review-comment">{{ review.comment }}</p>
+
+    <!-- Reviews and Leave Review Section -->
+    <div class="review-section">
+        <!-- "Leave Review" Button - Only visible to authenticated users -->
+        {% if user.is_authenticated %}
+            <div class="leave-review-cont">
+                <a href="#" id="toggle-review" onclick="toggleReviewForm()">Leave Review</a>
+            </div>
+        {% else %}
+            <div class="leave-review-cont">
+                <p>You must be <a href="{% url 'login' %}">logged in</a> to leave a review.</p>
+            </div>
+        {% endif %}
+
+        <!-- Review Form - Hidden by default -->
+        <div id="review-form-container" class="review-form hidden">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Post Review</button>
+            </form>
         </div>
-        {% endfor %}
+
+        <!-- Reviews Section -->
+        <h2 id="title-review">Reviews:</h2>
+        <div class="reviews">
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review">
+                        <h3 class="review-username">{{ review.user.username }}</h3>
+                        <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                        <p class="review-comment">{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet. Be the first to review!</p>
+            {% endif %}
+        </div>
     </div>
 </main>
+
+<script>
+    function toggleReviewForm() {
+        const reviewFormContainer = document.getElementById('review-form-container');
+        const toggleReviewBtn = document.getElementById('toggle-review');
+
+        if (reviewFormContainer.classList.contains('hidden')) {
+            reviewFormContainer.classList.remove('hidden');
+            toggleReviewBtn.textContent = 'Cancel';
+        } else {
+            reviewFormContainer.classList.add('hidden');
+            toggleReviewBtn.textContent = 'Leave Review';
+        }
+    }
+</script>
+
 {% endblock %}

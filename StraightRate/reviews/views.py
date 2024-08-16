@@ -1,6 +1,7 @@
 from django.db.models import Avg, Count
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
+from StraightRate.reviews.forms import AddMovieReviewForm
 from StraightRate.reviews.models import Movie, VideoGame
 
 
@@ -29,9 +30,21 @@ def details_movie_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.reviews.all()
 
+    if request.method == 'POST':
+        form = AddMovieReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.movie = movie
+            review.user = request.user
+            review.save()
+            return redirect('details-movie', movie_id=movie_id)
+    else:
+        form = AddMovieReviewForm()
+
     context = {
         'movie': movie,
         'reviews': reviews,
+        'form': form,
     }
     return render(request, 'movies/movie-details.html', context)
 

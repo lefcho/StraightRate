@@ -39,9 +39,7 @@
         </div>
     </div>
 
-    <!-- Reviews and Leave Review Section -->
     <div class="review-section">
-        <!-- "Leave Review" Button - Only visible to authenticated users -->
         {% if user.is_authenticated %}
             <div class="leave-review-cont">
                 <a href="#" id="toggle-review" onclick="toggleReviewForm()">Leave Review</a>
@@ -53,44 +51,44 @@
         {% endif %}
 
         <!-- Review Form - Hidden by default -->
-        <div id="review-form-container" class="review-form hidden">
-            <form method="POST">
+        <div id="review-form-container" class="hidden">
+            <form class="review-form" method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Post Review</button>
+                <div class="star-rating">
+                    <input type="hidden" name="rating" id="rating-value" value="{{ form.rating.value|default:0 }}">
+                    <i class="fa fa-star star" data-value="1"></i>
+                    <i class="fa fa-star star" data-value="2"></i>
+                    <i class="fa fa-star star" data-value="3"></i>
+                    <i class="fa fa-star star" data-value="4"></i>
+                    <i class="fa fa-star star" data-value="5"></i>
+                </div>
+                <br>
+                <label for="comment">Comment:</label>
+                <textarea name="comment" id="comment" rows="4" required>{{ form.comment.value|default:'' }}</textarea>
+                <br>
+                <button type="submit" class="btn-three draw-border btn-primary">Post Review</button>
             </form>
+
         </div>
 
-        <!-- Reviews Section -->
-    <h2 id="title-review">Reviews:</h2>
-    <div class="reviews">
-        {% if reviews %}
-            {% for review in reviews %}
-                <div class="review">
-                    <h3 class="review-username">{{ review.user.username }}</h3>
-                    <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
-                    <p class="review-comment">{{ review.comment }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No reviews yet.</p>
-        {% endif %}
-    </div>
+        <h2 id="title-review">Reviews:</h2>
+        <div class="reviews">
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review">
+                        <h3 class="review-username">{{ review.user.username }}</h3>
+                        <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                        <p class="review-comment">{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
 </main>
 
-<script>
-    function toggleReviewForm() {
-        const reviewFormContainer = document.getElementById('review-form-container');
-        const toggleReviewBtn = document.getElementById('toggle-review');
+<script type="text/javascript" src="{% static 'scripts/toggleReview.js' %}"></script>
+<script type="text/javascript" src="{% static 'scripts/handleStars.js' %}"></script>
 
-        if (reviewFormContainer.classList.contains('hidden')) {
-            reviewFormContainer.classList.remove('hidden');
-            toggleReviewBtn.textContent = 'Cancel';
-        } else {
-            reviewFormContainer.classList.add('hidden');
-            toggleReviewBtn.textContent = 'Leave Review';
-        }
-    }
-</script>
 
 {% endblock %}

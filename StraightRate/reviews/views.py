@@ -30,7 +30,7 @@ def details_movie_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.reviews.all()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = AddMovieReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
@@ -53,7 +53,7 @@ def details_game_view(request, game_id):
     video_game = get_object_or_404(VideoGame, id=game_id)
     reviews = video_game.reviews.all()
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = AddVideoGameReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)

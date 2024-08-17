@@ -62,20 +62,19 @@
         </div>
 
         <!-- Reviews Section -->
-        <h2 id="title-review">Reviews:</h2>
-        <div class="reviews">
-            {% if reviews %}
-                {% for review in reviews %}
-                    <div class="review">
-                        <h3 class="review-username">{{ review.user.username }}</h3>
-                        <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
-                        <p class="review-comment">{{ review.comment }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>No reviews yet. Be the first to review!</p>
-            {% endif %}
-        </div>
+    <h2 id="title-review">Reviews:</h2>
+    <div class="reviews">
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review">
+                    <h3 class="review-username">{{ review.user.username }}</h3>
+                    <p class="review-rating">Rating: {{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                    <p class="review-comment">{{ review.comment }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No reviews yet.</p>
+        {% endif %}
     </div>
 </main>
 

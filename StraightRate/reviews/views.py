@@ -1,7 +1,7 @@
 from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
-from StraightRate.reviews.forms import AddMovieReviewForm
+from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm
 from StraightRate.reviews.models import Movie, VideoGame
 
 
@@ -13,10 +13,10 @@ def home(request):
                   .order_by('-avg_rating')
     [:5])
     top_games = (VideoGame.objects
-                  .annotate(avg_rating=Avg('reviews__rating'),
-                            review_count=Count('reviews'))
-                  .filter(review_count__gt=0)
-                  .order_by('-avg_rating')
+                 .annotate(avg_rating=Avg('reviews__rating'),
+                           review_count=Count('reviews'))
+                 .filter(review_count__gt=0)
+                 .order_by('-avg_rating')
     [:5])
     context = {
         'top_movies': top_movies,
@@ -53,9 +53,21 @@ def details_game_view(request, game_id):
     video_game = get_object_or_404(VideoGame, id=game_id)
     reviews = video_game.reviews.all()
 
+    if request.method == 'POST':
+        form = AddVideoGameReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.video_game = video_game
+            review.user = request.user
+            review.save()
+            return redirect('details-video-game', game_id=game_id)
+    else:
+        form = AddVideoGameReviewForm()
+
     context = {
         'video_game': video_game,
         'reviews': reviews,
+        'form': form,
     }
 
     return render(request, 'video-games/video-games-details.html', context)
@@ -79,35 +91,3 @@ def video_games_dashboard(request):
         'games_by_genre': games_by_genre,
     }
     return render(request, 'video-games/video-games-dashboard.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

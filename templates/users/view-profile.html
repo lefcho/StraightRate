@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+{% block content %}
+{% load static %}
+<main>
+    <h1>Your Profile</h1>
 
-</body>
-</html>
+    <div class="profile-info">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="button" id="edit-profile-btn" class="btn btn-primary">Edit Profile</button>
+            <button type="submit" id="save-profile-btn" class="btn btn-success hidden" name="profile_update">Save
+                Changes
+            </button>
+            <button type="button" id="cancel-edit-btn" class="btn btn-danger hidden">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Movie Reviews Section -->
+    <h2>Your Movie Reviews</h2>
+    <div class="reviews">
+        {% for review in movie_reviews %}
+            <div class="review">
+                <h3>{{ review.movie.title }}</h3>
+                <form method="POST" action="{% url 'edit_movie_review' review.id %}">
+                    {% csrf_token %}
+                    <label>Rating:</label>
+                    {{ review.rating }}
+                    <br>
+                    <label>Comment:</label>
+                    <textarea name="comment" disabled>{{ review.comment }}</textarea>
+                    <br>
+                    <button type="button" class="edit-review-btn btn btn-primary">Edit</button>
+                    <button type="submit" class="save-review-btn btn btn-success hidden">Save</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Video Game Reviews Section -->
+    <h2>Your Video Game Reviews</h2>
+    <div class="reviews">
+        {% for review in video_game_reviews %}
+            <div class="review">
+                <h3>{{ review.video_game.title }}</h3>
+                <form method="POST" action="{% url 'edit_video_game_review' review.id %}">
+                    {% csrf_token %}
+                    <label>Rating:</label>
+                    {{ review.rating }}
+                    <br>
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment" id="comment" disabled>{{ review.comment }}</textarea>
+                    <br>
+                    <button type="button" class="edit-review-btn btn btn-primary">Edit</button>
+                    <button type="submit" class="save-review-btn btn btn-success hidden">Save</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script type="text/javascript" src="{% static 'scripts/editProfileFieldsHandler.js' %}"></script>
+{% endblock %}

@@ -22,7 +22,7 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li>Welcome, {{ user.username }}</li>
-                    <li><a href="#">View Profile</a></li>
+                    <li><a href="{% url 'view-profile' %}">View Profile</a></li>
                     <li><a href="{% url 'logout' %}">Log out</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Log in</a></li>

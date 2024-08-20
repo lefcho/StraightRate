@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
-from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm
+from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm, EditMovieReviewForm, \
+    EditVideoGameReviewForm
 from StraightRate.reviews.models import Movie, VideoGame
 
 
@@ -91,3 +93,29 @@ def video_games_dashboard(request):
         'games_by_genre': games_by_genre,
     }
     return render(request, 'video-games/video-games-dashboard.html', context)
+
+
+@login_required
+def edit_movie_review(request, review_id):
+    review = get_object_or_404(EditMovieReviewForm, id=review_id, user=request.user)
+
+    if request.method == 'POST':
+        form = EditMovieReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+
+    return redirect('view_profile')
+
+
+@login_required
+def edit_video_game_review(request, review_id):
+    review = get_object_or_404(EditVideoGameReviewForm, id=review_id, user=request.user)
+
+    if request.method == 'POST':
+        form = EditVideoGameReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+
+    return redirect('view_profile')

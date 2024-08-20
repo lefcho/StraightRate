@@ -34,3 +34,19 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class ViewUserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ViewUserProfileForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['disabled'] = True
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        help_texts = {
+            'username': None,
+            'email': None,
+        }
+

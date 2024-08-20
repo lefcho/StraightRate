@@ -8,13 +8,11 @@ class BaseMovieReviewForm(forms.ModelForm):
         model = MovieReview
         fields = ['rating', 'comment']
 
+
+class AddMovieReviewForm(BaseMovieReviewForm):
     widgets = {
         'comment': forms.TextInput(attrs={'placeholder': 'Write a comment'}),
     }
-
-
-class AddMovieReviewForm(BaseMovieReviewForm):
-    pass
 
 
 class BaseVideoGameReviewForm(forms.ModelForm):
@@ -22,10 +20,16 @@ class BaseVideoGameReviewForm(forms.ModelForm):
         model = VideoGameReview
         fields = ['rating', 'comment']
 
+
+class AddVideoGameReviewForm(BaseVideoGameReviewForm):
     widgets = {
         'comment': forms.TextInput(attrs={'placeholder': 'Write a comment'}),
     }
 
 
-class AddVideoGameReviewForm(BaseVideoGameReviewForm):
+class EditMovieReviewForm(BaseMovieReviewForm):
+    pass
+
+
+class EditVideoGameReviewForm(BaseMovieReviewForm):
     pass

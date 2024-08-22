@@ -2,9 +2,9 @@
 {% block content %}
 {% load static %}
 <main>
-    <h1>Your Profile</h1>
 
     <div class="profile-info">
+        <h1>Your Profile</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
@@ -21,18 +21,17 @@
     <div class="reviews">
         {% for review in movie_reviews %}
             <div class="review">
-                <h3>{{ review.movie.title }}</h3>
-                <form method="POST" action="{% url 'edit_movie_review' review.id %}">
-                    {% csrf_token %}
-                    <label>Rating:</label>
-                    {{ review.rating }}
-                    <br>
-                    <label>Comment:</label>
-                    <textarea name="comment" disabled>{{ review.comment }}</textarea>
-                    <br>
-                    <button type="button" class="edit-review-btn btn btn-primary">Edit</button>
-                    <button type="submit" class="save-review-btn btn btn-success hidden">Save</button>
-                </form>
+                <h3><a href="{% url 'details-movie' review.movie.id %}">{{ review.movie.title }}</a></h3>
+                <div class="review-info">
+                    <div class="display-row">
+                        <p class="review-label">Rating:</p>
+                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                    </div>
+                    <div class="display-row">
+                        <p class="review-label">Comment:</p>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
@@ -42,18 +41,18 @@
     <div class="reviews">
         {% for review in video_game_reviews %}
             <div class="review">
-                <h3>{{ review.video_game.title }}</h3>
-                <form method="POST" action="{% url 'edit_video_game_review' review.id %}">
-                    {% csrf_token %}
-                    <label>Rating:</label>
-                    {{ review.rating }}
-                    <br>
-                    <label for="comment">Comment:</label>
-                    <textarea name="comment" id="comment" disabled>{{ review.comment }}</textarea>
-                    <br>
-                    <button type="button" class="edit-review-btn btn btn-primary">Edit</button>
-                    <button type="submit" class="save-review-btn btn btn-success hidden">Save</button>
-                </form>
+                <h3><a href="{% url 'details-video-game' review.video_game.id %}">{{ review.video_game.title }}</a>
+                </h3>
+                <div class="review-info">
+                    <div class="display-row">
+                        <p class="review-label">Rating:</p>
+                        <p>{{ review.rating }} <i class="fa-solid fa-star"></i></p>
+                    </div>
+                    <div class="display-row">
+                        <p class="review-label">Comment:</p>
+                        <p>{{ review.comment }}</p>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>

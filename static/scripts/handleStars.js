@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const stars = document.querySelectorAll('.star');
     const ratingValue = document.getElementById('rating-value');
 
+    // Set initial stars based on current rating
+    highlightStars(ratingValue.value);
+
     // Handle hover event
     stars.forEach(star => {
         star.addEventListener('mouseover', function() {

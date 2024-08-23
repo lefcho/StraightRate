@@ -1,10 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
 from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm, EditMovieReviewForm, \
     EditVideoGameReviewForm
-from StraightRate.reviews.models import Movie, VideoGame
+from StraightRate.reviews.models import Movie, VideoGame, MovieReview
 
 
 def home(request):
@@ -32,6 +33,10 @@ def details_movie_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.reviews.all()
 
+    user_review = None
+    if request.user.is_authenticated:
+        user_review = MovieReview.objects.filter(movie=movie, user=request.user).first()
+
     if request.method == 'POST' and request.user.is_authenticated:
         form = AddMovieReviewForm(request.POST)
         if form.is_valid():
@@ -46,9 +51,27 @@ def details_movie_view(request, movie_id):
     context = {
         'movie': movie,
         'reviews': reviews,
+        'user_review': user_review,
         'form': form,
     }
     return render(request, 'movies/movie-details.html', context)
+
+
+@login_required
+def delete_review(request, review_id):
+    # Get the review object, or return a 404 if it doesn't exist
+    review = get_object_or_404(MovieReview, id=review_id)
+
+    # Check if the user is the owner of the review
+    if review.user == request.user:
+        # Delete the review
+        review.delete()
+        messages.success(request, "Your review has been deleted successfully.")
+    else:
+        messages.error(request, "You are not authorized to delete this review.")
+
+    # Redirect to the movie details page (or any other relevant page)
+    return redirect('details-movie', movie_id=review.movie.id)
 
 
 def details_game_view(request, game_id):
@@ -93,29 +116,3 @@ def video_games_dashboard(request):
         'games_by_genre': games_by_genre,
     }
     return render(request, 'video-games/video-games-dashboard.html', context)
-
-
-@login_required
-def edit_movie_review(request, review_id):
-    review = get_object_or_404(EditMovieReviewForm, id=review_id, user=request.user)
-
-    if request.method == 'POST':
-        form = EditMovieReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            return redirect('view_profile')
-
-    return redirect('view_profile')
-
-
-@login_required
-def edit_video_game_review(request, review_id):
-    review = get_object_or_404(EditVideoGameReviewForm, id=review_id, user=request.user)
-
-    if request.method == 'POST':
-        form = EditVideoGameReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            return redirect('view_profile')
-
-    return redirect('view_profile')

@@ -7,6 +7,5 @@ urlpatterns = (
     path('<int:game_id>/details-video-game/', views.details_game_view, name='details-video-game'),
     path('movies/', views.movie_dashboard, name='movie-dashboard'),
     path('video-games/', views.video_games_dashboard, name='video-games-dashboard'),
-    path('profile/edit_movie_review/<int:review_id>/', views.edit_movie_review, name='edit_movie_review'),
-    path('profile/edit_video_game_review/<int:review_id>/', views.edit_video_game_review, name='edit_video_game_review'),
+    path('review/delete/<int:review_id>/', views.delete_review, name='delete_review'),
 )

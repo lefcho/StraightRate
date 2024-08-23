@@ -197,6 +197,12 @@
     cursor: pointer;
 }
 
+.star.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 .star.filled {
     color: gold;
 }

@@ -32,21 +32,31 @@ def home(request):
 def details_movie_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.reviews.all()
+    user_review = MovieReview.objects.filter(movie=movie, user=request.user).first()
 
-    user_review = None
-    if request.user.is_authenticated:
-        user_review = MovieReview.objects.filter(movie=movie, user=request.user).first()
-
-    if request.method == 'POST' and request.user.is_authenticated:
-        form = AddMovieReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.movie = movie
-            review.user = request.user
-            review.save()
+    if request.method == 'POST':
+        if 'delete_review' in request.POST:
+            # Handle delete review
+            review_id = request.POST.get('review_id')
+            review = get_object_or_404(MovieReview, id=review_id, user=request.user)
+            review.delete()
+            messages.success(request, "Your review has been deleted successfully.")
             return redirect('details-movie', movie_id=movie_id)
+
+        else:
+            # Handle save review
+            form = AddMovieReviewForm(request.POST, instance=user_review)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.movie = movie
+                review.user = request.user
+                review.save()
+                messages.success(request, "Your review has been saved successfully.")
+                return redirect('details-movie', movie_id=movie_id)
+            else:
+                messages.error(request, "There was a problem saving your review.")
     else:
-        form = AddMovieReviewForm()
+        form = AddMovieReviewForm(instance=user_review)
 
     context = {
         'movie': movie,

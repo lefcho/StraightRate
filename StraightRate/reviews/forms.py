@@ -10,9 +10,10 @@ class BaseMovieReviewForm(forms.ModelForm):
 
 
 class AddMovieReviewForm(BaseMovieReviewForm):
-    widgets = {
-        'comment': forms.TextInput(attrs={'placeholder': 'Write a comment'}),
-    }
+    def __init__(self, *args, **kwargs):
+        super(AddMovieReviewForm, self).__init__(*args, **kwargs)
+
+        self.fields['comment'].widget.attrs['placeholder'] = 'Write a movie review'
 
 
 class BaseVideoGameReviewForm(forms.ModelForm):
@@ -22,9 +23,10 @@ class BaseVideoGameReviewForm(forms.ModelForm):
 
 
 class AddVideoGameReviewForm(BaseVideoGameReviewForm):
-    widgets = {
-        'comment': forms.TextInput(attrs={'placeholder': 'Write a comment'}),
-    }
+    class Meta(BaseVideoGameReviewForm.Meta):
+        widgets = {
+            'comment': forms.Textarea(attrs={'placeholder': 'Write a comment'}),
+        }
 
 
 class EditMovieReviewForm(BaseMovieReviewForm):

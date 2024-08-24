@@ -44,7 +44,7 @@
             {% if user_review %}
                 <!-- User's existing review with Edit and Delete buttons -->
                 <div class="user-review">
-                    <h3>Your Review</h3>
+                    <h2>Your Review</h2>
                     <div class="review-actions">
                         <form class="review-form" method="POST">
                             {% csrf_token %}
@@ -105,7 +105,7 @@
                     <i class="fa fa-star star" data-value="5"></i>
                 </div>
                 <br>
-                <textarea name="comment" id="comment" rows="4" required>{{ form.comment.value|default:'' }}</textarea>
+                <textarea name="comment" id="comment" rows="4" required placeholder="Write a movie review">{{ form.comment.value|default:'' }}</textarea>
                 <br>
                 <div class="form-buttons">
                     <button type="submit" class="btn-three draw-border btn-primary">Post Review</button>

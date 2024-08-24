@@ -140,6 +140,11 @@
     padding: 0.5em;
 }
 
+.review-actions {
+    margin: auto;
+    max-width: 70%;
+}
+
 .review-form {
     width: 100%;
     padding: 2em 1em;

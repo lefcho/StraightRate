@@ -145,12 +145,15 @@
     padding: 2em 1em;
     color: rgb(120, 230, 77);
     margin: 1em auto 0;
-    display: flex;;
-    justify-content: center;
-}
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: left;
+    align-items: flex-start;
 
-.review-form .btn {
-
+    textarea {
+        width: 100%;
+    }
 }
 
 .hidden {

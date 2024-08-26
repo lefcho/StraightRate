@@ -1,4 +1,6 @@
 let originalComment = '';
+let originalRating = 0;
+
 const commentArea = document.querySelector('.review-form textarea');
 const rating = document.getElementById('rating-value');
 
@@ -6,7 +8,9 @@ const rating = document.getElementById('rating-value');
 if (commentArea) {
     originalComment = commentArea.value;
 }
-let originalRating = rating ? rating.value : 0;
+if (rating) {
+    originalRating = rating.value;
+}
 
 // Get star elements
 const stars = document.querySelectorAll('.star');
@@ -42,8 +46,10 @@ function handleStarMouseOut() {
 
 // Handle star click
 function handleStarClick() {
-    rating.value = this.getAttribute('data-value');
-    highlightStars(rating.value);
+    const selectedRating = this.getAttribute('data-value');
+    rating.value = selectedRating; // Update the hidden rating input field
+    highlightStars(selectedRating);
+
 }
 
 // Function to reset all stars to default (unfilled)
@@ -85,12 +91,11 @@ document.getElementById('cancel-review-btn').addEventListener('click', function(
     }
 
     // Reset the stars to their original state
-    stars.forEach((star, index) => {
-        star.classList.remove('filled');
-        if (index < originalRating) {
-            star.classList.add('filled');
-        }
-    });
+    resetStars();
+    highlightStars(originalRating);
+
+    // Reset the rating to the original value
+    rating.value = originalRating;
 
     // Hide the Save and Cancel buttons
     document.getElementById('save-review-btn').classList.add('hidden');
@@ -103,5 +108,9 @@ document.getElementById('cancel-review-btn').addEventListener('click', function(
     setStarsInteractive(false);
 });
 
+
 // Initialize stars as non-interactive
 setStarsInteractive(false);
+
+// Highlight the stars based on the initial rating value
+highlightStars(rating.value);

@@ -38,12 +38,16 @@
                 {% if user_review %}
                     <!-- User's existing review with Edit and Delete buttons -->
                     <div class="user-review">
-                        <h3>Your Review</h3>
+                        <h2>Your Review</h2>
                         <div class="review-actions">
                             <form class="review-form" method="POST">
                                 {% csrf_token %}
                                 <div class="star-rating">
-                                    <input type="hidden" name="rating" id="rating-value" value="{{ user_review.rating }}">
+                                    <!-- Hidden input to store the rating value -->
+                                    <input type="hidden" name="rating" id="rating-value"
+                                           value="{{ user_review.rating }}"
+                                           data-initial-rating="{{ user_review.rating }}">
+                                    <!-- Star icons that the user clicks -->
                                     <i class="fa fa-star star" data-value="1"></i>
                                     <i class="fa fa-star star" data-value="2"></i>
                                     <i class="fa fa-star star" data-value="3"></i>
@@ -51,25 +55,21 @@
                                     <i class="fa fa-star star" data-value="5"></i>
                                 </div>
                                 <br>
-                                <textarea name="comment" id="comment" rows="4" disabled
-                                          data-initial-comment="{{ user_review.comment }}">{{ user_review.comment }}</textarea>
-                                <input type="hidden" name="rating" id="rating-value" value="{{ user_review.rating }}"
-                                       data-initial-rating="{{ user_review.rating }}">
+                                <!-- Enabled the textarea to make sure its content can be submitted -->
+                                <textarea name="comment" id="comment" rows="4"
+                                          required>{{ user_review.comment }}</textarea>
                                 <br>
                                 <div class="form-buttons">
-                                    <button type="button" id="edit-review-btn" class="btn btn-primary">Edit Review</button>
-                                    <button type="submit" id="save-review-btn" class="btn btn-success hidden">Save Review</button>
-                                    <button type="button" id="cancel-review-btn" class="btn btn-danger hidden">Cancel</button>
+                                    <button type="button" id="edit-review-btn" class="btn btn-primary">Edit Review
+                                    </button>
+                                    <button type="submit" id="save-review-btn" class="btn btn-success hidden">Save
+                                        Review
+                                    </button>
+                                    <button type="button" id="cancel-review-btn" class="btn btn-danger hidden">Cancel
+                                    </button>
                                 </div>
                             </form>
-                            <!-- Properly closed the review form -->
 
-                            <!-- Delete review form -->
-                            <form id="delete-review-form" method="POST" style="display: none;">
-                                {% csrf_token %}
-                                <input type="hidden" name="review_id" value="{{ user_review.id }}">
-                                <button type="submit" name="delete_review" class="btn btn-danger">Delete Review</button>
-                            </form>
                         </div>
                     </div>
 
@@ -98,7 +98,8 @@
                         <i class="fa fa-star star" data-value="5"></i>
                     </div>
                     <br>
-                    <textarea name="comment" id="comment" rows="4" required placeholder="Write a video game review">{{ form.comment.value|default:'' }}</textarea>
+                    <textarea name="comment" id="comment" rows="4" required
+                              placeholder="Write a video game review">{{ form.comment.value|default:'' }}</textarea>
                     <br>
                     <button type="submit" class="btn btn-primary">Post Review</button>
                 </form>

@@ -49,6 +49,7 @@ def details_movie_view(request, movie_id):
                 review = form.save(commit=False)
                 review.movie = movie
                 review.user = request.user
+                review.rating = request.POST.get('rating')
                 review.save()
                 messages.success(request, "Your review has been saved successfully.")
                 return redirect('details-movie', movie_id=movie_id)

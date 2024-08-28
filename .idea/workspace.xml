@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cce3d0da-2126-47f8-9bd1-aa2d53065ec8" name="Changes" comment="editing review rating now saves it correctly">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/navigation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/common/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/base.html" afterDir="false" />
-    </list>
+    <list default="true" id="cce3d0da-2126-47f8-9bd1-aa2d53065ec8" name="Changes" comment="a fancy searchbar added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +197,7 @@
       <workItem from="1724431507919" duration="10028000" />
       <workItem from="1724531363029" duration="3888000" />
       <workItem from="1724690363173" duration="5217000" />
-      <workItem from="1724876226924" duration="1280000" />
+      <workItem from="1724876226924" duration="1685000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -315,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724697311093</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="a fancy searchbar added">
+      <option name="closed" value="true" />
+      <created>1724877768642</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724877768642</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +349,8 @@
     <MESSAGE value="review form improvements" />
     <MESSAGE value="edit reviews added to video games" />
     <MESSAGE value="editing review rating now saves it correctly" />
-    <option name="LAST_COMMIT_MESSAGE" value="editing review rating now saves it correctly" />
+    <MESSAGE value="a fancy searchbar added" />
+    <option name="LAST_COMMIT_MESSAGE" value="a fancy searchbar added" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/StraightRate$.coverage" NAME=" Coverage Results" MODIFIED="1724357025727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\ivand\PycharmProjects\StraightRate" />

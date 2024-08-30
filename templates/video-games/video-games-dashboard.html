@@ -4,7 +4,7 @@
 <main>
     {% for genre, games in games_by_genre.items %}
         <h2>{{ genre }}</h2>
-        <div class="movies">
+        <div class="video-games">
             {% if games %}
                 {% for game in games %}
                     <a href="{% url 'details-video-game' game.id %}">

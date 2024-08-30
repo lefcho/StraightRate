@@ -18,24 +18,26 @@
             <li><a href="{% url 'video-games-dashboard' %}">Video Games</a></li>
         </ul>
     </div>
+    <form method="GET" action="{% url 'search' %}">
         <div class="flexbox">
             <div class="search">
                 <div>
-                    <input type="text" placeholder="Search . . ." required>
+                    <input type="text" name="q" placeholder="Search . . ." required>
                 </div>
             </div>
         </div>
-        <div id="head-2">
-            <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'view-profile' %}">View Profile</a></li>
-                    <li><a href="{% url 'logout' %}">Log out</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Log in</a></li>
-                    <li><a href="{% url 'signup' %}">Create an Account</a></li>
-                {% endif %}
-            </ul>
-        </div>
+    </form>
+    <div id="head-2">
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'view-profile' %}">View Profile</a></li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                <li><a href="{% url 'signup' %}">Create an Account</a></li>
+            {% endif %}
+        </ul>
+    </div>
 </header>
 <div id="wrapper-main">
     {% block content %}

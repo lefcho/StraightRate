@@ -8,4 +8,5 @@ urlpatterns = (
     path('movies/', views.movie_dashboard, name='movie-dashboard'),
     path('video-games/', views.video_games_dashboard, name='video-games-dashboard'),
     path('review/delete/<int:review_id>/', views.delete_review, name='delete_review'),
+    path('search/', views.searched_media, name='search'),
 )

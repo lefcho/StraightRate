@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
-from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm
+from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm, SearchForm
 from StraightRate.reviews.models import Movie, VideoGame, MovieReview, VideoGameReview
 
 
@@ -166,3 +166,21 @@ def video_games_dashboard(request):
         'games_by_genre': games_by_genre,
     }
     return render(request, 'video-games/video-games-dashboard.html', context)
+
+
+def searched_media(request):
+    query = request.GET.get('q')
+
+    if len(query) == 1:
+        movie_results = Movie.objects.filter(title__istartswith=query)
+        game_results = VideoGame.objects.filter(title__istartswith=query)
+    else:
+        movie_results = Movie.objects.filter(title__icontains=query)
+        game_results = VideoGame.objects.filter(title__icontains=query)
+
+    context = {
+        'query': query,
+        'movie_results': movie_results,
+        'game_results': game_results,
+    }
+    return render(request, 'common/search.html', context)

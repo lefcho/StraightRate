@@ -7,7 +7,7 @@
             <h2>Create Account</h2>
             <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
         </div>
-        <form method="POST">
+        <form class="edited" method="POST">
             {% csrf_token %}
             {{ form }}
             <div class="wrapper-in-btn">

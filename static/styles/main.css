@@ -60,7 +60,7 @@ main h2 {
     color: rgb(120, 230, 77);
 }
 
-.top-movies, .top-video-games, .movies {
+.top-movies, .top-video-games, .movies, .video-games {
     margin: auto;
     display: flex;
     justify-content: center;

@@ -29,9 +29,8 @@ class AddVideoGameReviewForm(BaseVideoGameReviewForm):
         }
 
 
-class EditMovieReviewForm(BaseMovieReviewForm):
-    pass
-
-
-class EditVideoGameReviewForm(BaseMovieReviewForm):
-    pass
+class SearchForm(forms.Form):
+    q = forms.CharField(
+        max_length=100,
+        required=True,
+    )

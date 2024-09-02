@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count
 from django.shortcuts import render, get_object_or_404, redirect
 
-from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm, SearchForm
+from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm
 from StraightRate.reviews.models import Movie, VideoGame, MovieReview, VideoGameReview
 
 
@@ -31,32 +31,34 @@ def home(request):
 def details_movie_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     reviews = movie.reviews.all()
-    user_review = MovieReview.objects.filter(movie=movie, user=request.user).first()
+    user_review = None
+    form = None
 
-    if request.method == 'POST':
-        if 'delete_review' in request.POST:
-            # Handle delete review
-            review_id = request.POST.get('review_id')
-            review = get_object_or_404(MovieReview, id=review_id, user=request.user)
-            review.delete()
-            messages.success(request, "Your review has been deleted successfully.")
-            return redirect('details-movie', movie_id=movie_id)
+    if request.user.is_authenticated:
+        user_review = MovieReview.objects.filter(movie=movie, user=request.user).first()
 
-        else:
-            # Handle save review
-            form = AddMovieReviewForm(request.POST, instance=user_review)
-            if form.is_valid():
-                review = form.save(commit=False)
-                review.movie = movie
-                review.user = request.user
-                review.rating = request.POST.get('rating')
-                review.save()
-                messages.success(request, "Your review has been saved successfully.")
+        if request.method == 'POST':
+            if 'delete_review' in request.POST:
+                review_id = request.POST.get('review_id')
+                review = get_object_or_404(MovieReview, id=review_id, user=request.user)
+                review.delete()
+                messages.success(request, "Your review has been deleted successfully.")
                 return redirect('details-movie', movie_id=movie_id)
+
             else:
-                messages.error(request, "There was a problem saving your review.")
-    else:
-        form = AddMovieReviewForm(instance=user_review)
+                form = AddMovieReviewForm(request.POST, instance=user_review)
+                if form.is_valid():
+                    review = form.save(commit=False)
+                    review.movie = movie
+                    review.user = request.user
+                    review.rating = request.POST.get('rating')
+                    review.save()
+                    messages.success(request, "Your review has been saved successfully.")
+                    return redirect('details-movie', movie_id=movie_id)
+                else:
+                    messages.error(request, "There was a problem saving your review.")
+        else:
+            form = AddMovieReviewForm(instance=user_review)
 
     context = {
         'movie': movie,
@@ -69,16 +71,11 @@ def details_movie_view(request, movie_id):
 
 @login_required
 def delete_review(request, review_id):
-    # Get the review object, or return a 404 if it doesn't exist
     review = get_object_or_404(MovieReview, id=review_id)
 
     # Check if the user is the owner of the review
     if review.user == request.user:
-        # Delete the review
         review.delete()
-        messages.success(request, "Your review has been deleted successfully.")
-    else:
-        messages.error(request, "You are not authorized to delete this review.")
 
     # Redirect to the movie details page (or any other relevant page)
     return redirect('details-movie', movie_id=review.movie.id)

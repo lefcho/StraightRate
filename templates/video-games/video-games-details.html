@@ -25,7 +25,9 @@
                         <h5 class="info">{{ video_game.genre }}</h5>
                         <p class="seperator"> | </p>
                         <p class="small-info">Developer:</p>
-                        <h5 class="info">{{ video_game.developer.developer_name }}</h5>
+                        <a href="{% url 'developer' video_game.developer_id %}">
+                        <h5 class="info underline">{{ video_game.developer.developer_name }}</h5>
+                        </a>
                     </div>
                     <p class="description">{{ video_game.description }}</p>
                 </div>

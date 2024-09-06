@@ -29,7 +29,9 @@
                     <p class="seperator"> | </p>
 
                     <p class="small-info">Director:</p>
-                    <h5 class="info">{{ movie.director_full_name }}</h5>
+                    <a href="{% url 'director' movie.director_id %}">
+                    <h5 class="info underline">{{ movie.director_full_name }}</h5>
+                        </a>
                 </div>
 
                 <p class="description">

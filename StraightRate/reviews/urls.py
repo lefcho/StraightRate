@@ -9,4 +9,6 @@ urlpatterns = (
     path('video-games/', views.video_games_dashboard, name='video-games-dashboard'),
     path('review/delete/<int:review_id>/', views.delete_review, name='delete_review'),
     path('search/', views.searched_media, name='search'),
+    path('director/<int:director_id>/', views.director_view, name='director'),
+    path('developer/<int:developer_id>/', views.developer_view, name='developer')
 )

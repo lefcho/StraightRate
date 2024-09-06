@@ -51,18 +51,26 @@
                 <h4>Directors</h4>
                 <ul>
                     {% for director in directors %}
-                        <li><a href="#">{{ director.full_name }}</a></li>
+                        <li>
+                            <a href="{% url 'director' director.id %}" class="underline">
+                                {{ director.full_name }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
         {% endif %}
 
         {% if developers %}
-            <div class="directors">
+            <div class="developers">
                 <h4>Developers</h4>
                 <ul>
                     {% for developer in developers %}
-                        <li><a href="#">{{ developer.developer_name }}</a></li>
+                        <li>
+                            <a href="{% url 'developer' developer.id %}" class="underline">
+                                {{ developer.developer_name }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>

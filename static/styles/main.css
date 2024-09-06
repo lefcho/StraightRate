@@ -22,6 +22,12 @@ main h2 {
     justify-content: center;
 }
 
+.underline:hover {
+    text-decoration: underline;
+    color: #244ba2;
+    transition: all 300ms ease;
+}
+
 .movie, .game {
     max-width: 200px;
     text-align: center;
@@ -31,8 +37,8 @@ main h2 {
     border-color: rgba(81, 141, 39, 0.315);
     border-radius: 1em;
     transition: all .5s ease;
-    font-family:'Montserrat', sans-serif;
-    background-color : transparent;
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
     outline: none;
 }
 
@@ -40,6 +46,7 @@ main h2 {
     h3 {
         color: black;
     }
+
     color: rgb(0, 0, 0);
     background-color: rgb(120, 230, 77);
 }
@@ -69,9 +76,13 @@ main h2 {
     background-color: rgba(0, 0, 0, 0.888);
     padding: 2em;
     border-radius: 10px;
-    -webkit-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
-    -moz-box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
-    box-shadow: 15px 10px 50px 0px rgba(66,49,59,1);
+    -webkit-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    -moz-box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+    box-shadow: 15px 10px 50px 0px rgba(66, 49, 59, 1);
+}
+
+.movies, .video-games {
+    width: 70%;
 }
 
 .movie, .game p {

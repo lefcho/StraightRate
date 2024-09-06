@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Value, Q
+from django.db.models.functions import Concat
 from django.shortcuts import render, get_object_or_404, redirect
 
 from StraightRate.reviews.forms import AddMovieReviewForm, AddVideoGameReviewForm
-from StraightRate.reviews.models import Movie, VideoGame, MovieReview, VideoGameReview
+from StraightRate.reviews.models import Movie, VideoGame, MovieReview, VideoGameReview, Director, Developer
 
 
 def home(request):
@@ -168,16 +169,57 @@ def video_games_dashboard(request):
 def searched_media(request):
     query = request.GET.get('q')
 
+    directors = Director.objects.annotate(
+        full_name=Concat('first_name', Value(' '), 'last_name')
+    ).filter(
+        Q(full_name__icontains=query)
+    )
+
+    developers = Developer.objects.filter(developer_name__icontains=query)
+
     if len(query) == 1:
         movie_results = Movie.objects.filter(title__istartswith=query)
         game_results = VideoGame.objects.filter(title__istartswith=query)
     else:
         movie_results = Movie.objects.filter(title__icontains=query)
         game_results = VideoGame.objects.filter(title__icontains=query)
+        directors = Director.objects.annotate(
+            full_name=Concat('first_name', Value(' '), 'last_name')
+        ).filter(
+            Q(full_name__icontains=query)
+        )
+
+        developers = Developer.objects.filter(developer_name__icontains=query)
 
     context = {
         'query': query,
         'movie_results': movie_results,
         'game_results': game_results,
+        'directors': directors,
+        'developers': developers,
     }
     return render(request, 'common/search.html', context)
+
+
+def developer_view(request, developer_id):
+    developer = get_object_or_404(Developer, id=developer_id)
+    games = developer.games.all()
+
+    context = {
+        'developer': developer,
+        'games': games,
+    }
+
+    return render(request, 'common/developer.html', context)
+
+
+def director_view(request, director_id):
+    director = get_object_or_404(Director, id=director_id)
+    movies = director.movies.all()
+
+    contex = {
+        'director': director,
+        'movies': movies,
+    }
+
+    return render(request, 'common/director.html', contex)

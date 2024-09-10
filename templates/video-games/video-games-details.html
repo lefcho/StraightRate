@@ -22,11 +22,13 @@
                         <h5 class="info">{{ video_game.release_date }}</h5>
                         <p class="seperator"> | </p>
                         <p class="small-info">Genre:</p>
-                        <h5 class="info">{{ video_game.genre }}</h5>
+                        <a href="{% url 'video-games-dashboard' %}#{{ video_game.genre }}">
+                            <h5 class="info underline">{{ video_game.genre }}</h5>
+                        </a>
                         <p class="seperator"> | </p>
                         <p class="small-info">Developer:</p>
                         <a href="{% url 'developer' video_game.developer_id %}">
-                        <h5 class="info underline">{{ video_game.developer.developer_name }}</h5>
+                            <h5 class="info underline">{{ video_game.developer.developer_name }}</h5>
                         </a>
                     </div>
                     <p class="description">{{ video_game.description }}</p>

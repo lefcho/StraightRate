@@ -102,6 +102,7 @@
 }
 
 .small-info {
+    padding-right: 0.2em;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -119,6 +120,7 @@
 }
 
 .small-info-cont .seperator {
+    padding: 0 0.5em;
     font-size: 2em;
     color: rgb(120, 230, 77);
 }

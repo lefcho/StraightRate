@@ -3,8 +3,8 @@
 {% block content %}
 <main>
     {% for genre, movies in movies_by_genre.items %}
-        <h2>{{ genre }}</h2>
-        <div class="movies" id="{{ genre }}">
+        <h2 id="{{ genre }}" >{{ genre }}</h2>
+        <div class="movies">
             {% if movies %}
                 {% for movie in movies %}
                     <a href="{% url 'details-movie' movie.id %}">

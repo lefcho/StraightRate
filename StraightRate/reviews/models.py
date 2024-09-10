@@ -68,7 +68,7 @@ class Movie(models.Model):
         HORROR = 'Horror', 'Horror'
         MYSTERY = 'Mystery', 'Mystery'
         ROMANCE = 'Romance', 'Romance'
-        SCI_FI = 'Sci-Fi', 'Science Fiction'
+        SCI_FI = 'Sci-Fi', 'Sci-Fi'
         THRILLER = 'Thriller', 'Thriller'
         WESTERN = 'Western', 'Western'
         DOCUMENTARY = 'Documentary', 'Documentary'
@@ -125,8 +125,8 @@ class Movie(models.Model):
 class VideoGame(models.Model):
     class VideoGameGenreChoices(models.TextChoices):
         ACTION_ADVENTURE = 'Action-Adventure', 'Action-Adventure'
-        RPG = 'RPG', 'Role-Playing Game'
-        FPS = 'FPS', 'First Person Shooter'
+        RPG = 'RPG', 'RPG'
+        FPS = 'FPS', 'FPS'
         MMO = 'MMO', 'MMO'
         STRATEGY = 'Strategy', 'Strategy'
         SPORTS = 'Sports', 'Sports'
